@@ -1,0 +1,50 @@
+Juego del ahorcado
+
+- Al iniciar el programa el jugador podra: 
+    - registrarse si no existe en la bd de puntos (user, password)
+    - iniciar sesion si ya existe
+
+- Se disponibilizara un menu al jugador que tendra las siguentes opciones
+
+    1. Jugar
+    2. Ver tabla de puntuacion
+    3. Ver posicion en la tabla de puntuacion
+    4. Salir
+
+- Cuando se inicie el juego se tomara una palabra aleatoria de una base de 
+datos de palabras que se encuentra almacenada en un archivo
+
+- El jugador debera adivinar la palabra ingresando una letra a la vez
+
+- Cuando el jugador adivine una letra esta se mostrara en la interfaz en
+la posicion de la palabra en la que se encuentra
+
+- Si el jugador adivina todas las letras gana
+
+- Se tendra un limite de intentos de los cuales, si el jugador no adivina la 
+palabra dentro de este tiempo limite perdera y la palabra sera revelada
+
+- Cuando el jugador lleve el 80% de los intentos se le dara la oportunidad 
+de elegir si quiere arriesgarse a escribir la palabra completa, o seguir
+intentando con cada letra, si el jugador se arriesga y no adivina, perdera
+automaticamente
+
+- Agregar sistema de puntos que se guardara en el archivo de usuarios
+
+estructura registros archivo: user|password|points
+
+- El jugador iniciara con 10 puntos cada partida, los cuales iran disminuyendo
+el valor de acuerdo a la cantidad de intentos realizados
+
+- Luego de terminada una ronda, el jugador vuelve al menu
+
+- Limpiar interfaz con cada intento
+
+- Dibujar al ahorcado e imprimirlo de acuerdo a la cantidad de intentos 
+que lleve el jugador.
+
+Habra 4 escenas del ahorcado: 
+Inicial (el ahorcado tiene la cuerda puesta): intentos fallidos 0
+Intermedia (el ahorcado esta a punto de caer): 50% de los intentos fallidos
+Final ganador (el ahorcado es liberado): el jugador gano el juego
+Final perdedor (el ahorcado muere): el jugador supero el limite de intentos
