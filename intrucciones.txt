@@ -1,6 +1,6 @@
-Juego del ahorcado
+Hangman game
 
-- Al iniciar el programa el jugador podra: 
+- Al iniciar el jugador podra: 
     - registrarse si no existe en la bd de puntos (user, password)
     - iniciar sesion si ya existe
 	
@@ -14,22 +14,20 @@ Juego del ahorcado
     4. Salir
 
 - Cuando se inicie el juego se tomara una palabra aleatoria de una base de 
-datos de palabras que se encuentra almacenada en un archivo
+datos de palabras que se encuentra almacenada en el archivo DATA.txt
 
 - El jugador debera adivinar la palabra ingresando una letra a la vez
 
 - Cuando el jugador adivine una letra esta se mostrara en la interfaz en
-la posicion de la palabra en la que se encuentra
+la posicion correspondiente dentro de la palabra original
 
 - Si el jugador adivina todas las letras gana
 
 - Se tendra un limite de intentos de los cuales, si el jugador no adivina la 
 palabra dentro de este tiempo limite perdera y la palabra sera revelada, este limite de intentos
-debera ser calculado en base al tamaño de la palabra
+será calculado en base al tamaño de la palabra
 
-sera: numero de reintentos = tamaño palabra + 10
-
-
+numero de reintentos = tamaño palabra + 10
 
 - Cuando el jugador lleve el 80% de los intentos se le dara la oportunidad 
 de elegir si quiere arriesgarse a escribir la palabra completa, o seguir
@@ -41,16 +39,15 @@ automaticamente
 estructura registros archivo: username|password|points
 
 - El jugador iniciara con 10 puntos cada partida, los cuales iran disminuyendo
-el valor de acuerdo a la cantidad de intentos realizados
+el valor de acuerdo a la cantidad de intentos fallidos
 
 - Luego de terminada una ronda, el jugador vuelve al menu
 
 - Limpiar interfaz con cada intento
 
-- Dibujar al ahorcado e imprimirlo de acuerdo a la cantidad de intentos 
-que lleve el jugador.
+- El ahorcado tendra 4 escenas que dependeran del estatus de la ronda.
 
-Habra 4 escenas del ahorcado: 
+Estas escenas son: 
 Inicial (el ahorcado tiene la cuerda puesta): intentos fallidos 0
 Intermedia (el ahorcado esta a punto de caer): 50% de los intentos fallidos
 Final ganador (el ahorcado es liberado): el jugador gano el juego

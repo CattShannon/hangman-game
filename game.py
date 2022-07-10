@@ -173,7 +173,6 @@ def sort_scoreboard(users):
 
 
 def refresh_score_board():
-
     print_custom_message("Loading scoreboard...")
 
     users = []
@@ -197,16 +196,36 @@ def refresh_score_board():
     return users
 
 
+def print_scoreboard(position, user):
+    print("{:<8}".format(str(position + 1)) + "\t" 
+        + "{:<10}".format(user["username"]) + "\t\t" 
+        + str(user["points"]))
+
+
 def look_the_the_scoreboard():
     users_scoreboard = refresh_score_board()
     print_custom_message("Players ranking: ")
     print("Position\tPlayerName\t\tPoints")
     
     for position, user in enumerate(users_scoreboard):
-        print("{:<8}".format(str(position + 1)) + "\t" 
-        + "{:<10}".format(user["username"]) + "\t\t" 
-        + str(user["points"]))
+       print_scoreboard(position, user)
 
+    print("\n")
+    input("Enter anyting to go back at menu.")
+
+
+def search_user_position_in_scoreboard(user_info):
+    users_scoreboard = refresh_score_board()
+    print_custom_message("This is your ranking position")
+    print("Position\tPlayerName\t\tPoints")
+    
+    users_scoreboard = list(
+        filter( lambda us: us[1]["username"] == user_info["username"], 
+                enumerate(users_scoreboard) )
+    )
+
+    print_scoreboard(users_scoreboard[0][0], users_scoreboard[0][1])    
+    
     print("\n")
     input("Enter anyting to go back at menu.")
 
@@ -229,7 +248,7 @@ Enter the numeric code of your choice:
     operations = [
         lambda x: start_game(x), 
         lambda x: look_the_the_scoreboard(),
-        lambda x: print("Feature unavailable.")
+        lambda x: search_user_position_in_scoreboard(x)
     ]
 
     while active_session:

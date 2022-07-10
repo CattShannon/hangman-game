@@ -1,4 +1,6 @@
+**Hangman game: Python 3.10.5**
 
+Read intrucciones.txt (spanish)
 
 "user" dict:
 {
