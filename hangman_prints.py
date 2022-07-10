@@ -1,3 +1,6 @@
+import os
+import re
+
 
 GAME_TITLE = """
  __    __    _____    ___   __    _________   ___    ___    _____    ___   __ 
@@ -8,7 +11,7 @@ GAME_TITLE = """
 |__|  |__| |__| |__| |__| \___|  \________/  |__| \/ |__| |__| |__| |__| \___|
 """
 HAGNGMAN_SCENES = {
-    "start":"""  
+    "initial":"""  
          ===============================
          ||                           |
          ||                           |
@@ -17,7 +20,7 @@ HAGNGMAN_SCENES = {
          ||            { - - }        |
          ||             \_-_/       /===\\
          ||           /¯¯¯|¯¯¯\     \===/ 
-         ||          /    |   \\
+         ||          /    |    \\
          ||              / \\
         _||_____________/___\__ 
      __|******* _|_|_|_|_|_|_|_|
@@ -72,3 +75,17 @@ HAGNGMAN_SCENES = {
   __|**********|                     | |
  |*************|                    _____ 
     """}
+
+
+def print_custom_message(message):
+    os.system("cls")
+    print(GAME_TITLE)
+    print(message)
+
+
+def display_player_word(player_word):
+   print(re.sub("\\s*", " ", player_word))
+
+
+def display_hangman_scene(scene):
+   print(HAGNGMAN_SCENES.get(scene, "Hangman scene not available."))

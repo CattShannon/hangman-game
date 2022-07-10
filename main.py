@@ -1,29 +1,57 @@
-import random
-import math
 import re
 
-import hangman_draws
-import os
+from hangman_prints import print_custom_message
+from game import game_menu
 
 
 USERS_FILE_ROUTE = "./sources/users.txt"
 
+def start_program():
+    login_ok = False
+    user_info = {}
 
-def print_game_message(message):
-    os.system("cls")
-    print(hangman_draws.GAME_TITLE)
-    print(message)
+    while not login_ok:
+        print_custom_message("Welcome player, lets play :D")
+        username = validate_player_ingress()
+        user_info = find_user_info(username)
+
+        try:
+            if(len(user_info) == 0):
+                user_sing_up(username)
+            else:
+                user_login(user_info)
+        except AssertionError as e:
+            print("Login error. Cause:", str(e))
+            input("Press enter to continue ")
+            continue
+        
+        login_ok = True
+    
+    return user_info
 
 
 def validate_player_ingress():
 
     user_input_ok = False
-    username = input("Please enter your player name: ")
+    username = input("""    
+Please enter your player name
+
+Minimum 3 characters
+Maximum 10 characters
+    """)
 
     while not user_input_ok:
         if username == "":
-            print_game_message("Oh, something went worng...")
+            print_custom_message("Oh, something went worng...")
             username = input("Player name is mandatory, please enter one: ")
+            continue
+        elif len(username) < 3:
+            print_custom_message("Your username is not enough long (Min. 3 characters)")
+            username = input("Please enter your player name: ")
+            continue
+        elif len(username) > 10:
+            print_custom_message("Your username is too long (Max. 10 characters)")
+            username = input("Please enter your player name: ")
             continue
 
         user_input_ok = True
@@ -36,7 +64,7 @@ def find_user_info(username):
 
     with open(USERS_FILE_ROUTE, "r", encoding="utf-8") as user_file:
         for user in user_file:
-            user_split = user.split("|")
+            user_split = re.sub("\\n", "", user).split("|")
             
             if user_split[0] == username:
                 user_info = {
@@ -49,7 +77,7 @@ def find_user_info(username):
 
 
 def user_sing_up(username): 
-    print_game_message("Nice to meet you " + username)
+    print_custom_message("Nice to meet you " + username)
     print("You are new here, you need to register now.")
 
     password_ok = False
@@ -57,20 +85,20 @@ def user_sing_up(username):
 
     while not password_ok:
         if len(password) < 4:
-            print_game_message("Invalid password.")
+            print_custom_message("Invalid password.")
             password = input("Please enter your password (minimum 4 characters): ")
             continue
         
         password_ok = True
 
     with open(USERS_FILE_ROUTE, "a", encoding="utf-8") as users_file:
-        users_file.write(username + "|" + password + "|0")
+        users_file.write(username + "|" + password + "|0\n")
     
-    print_game_message("Register sucessful.")
+    print_custom_message("Register sucessful.")
 
 
 def user_login(user_info):
-    print_game_message("Is good to see you again " + user_info["username"])  
+    print_custom_message("Is good to see you again " + user_info["username"])  
 
     password_ok = False
     login_retries =  5
@@ -81,41 +109,19 @@ def user_login(user_info):
         assert login_retries > 0, "Login attempts exceeded"
             
         if password != user_info["password"]:
-            print_game_message("Incorrect password. Remaining attempts " + str(login_retries))
+            print_custom_message("Incorrect password. Remaining attempts " + str(login_retries))
             password = input("Please enter your password: ")
             login_retries -= 1
             continue
         
         password_ok = True
 
-    print_game_message("Login sucessful.")
-
-
-def read_words_file():
-    pass
+    print_custom_message("Login sucessful.")
 
 
 def run():
-
-    login_ok = False
-
-    while not login_ok:
-        print_game_message("Welcome player, lets play :D")
-        username = validate_player_ingress()
-        user_info = find_user_info(username)
-
-        try:
-            if(len(user_info) == 0):
-                user_sing_up(username)
-            else:
-                user_login(user_info)
-        except AssertionError as e:
-            print("Login error. Cause:", str(e))
-            input("Enter anything to continue: ")
-            continue
-        
-        login_ok = True
-
+    user_info = start_program()
+    game_menu(user_info)
 
 if __name__ == '__main__':
     run()

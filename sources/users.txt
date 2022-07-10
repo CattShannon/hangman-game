@@ -1,1 +1,3 @@
-Cat Shannon|admin|0
+hayabusa69|yamete|23
+cat|admin|9
+dog|admin|0
